@@ -1,49 +1,254 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <title>Belajar Tag HTML</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pembelajaran Jarak Jauh - Website Rhadit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #e60012;
+    --dark-red: #8f000b;
+    --black: #0a0a0a;
+    --paper: #f5f0e6;
+    --white: #ffffff;
+    --display: "Anton", Impact, "Arial Narrow", sans-serif;
+    --body: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  }
+ 
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  body {
+    font-family: var(--body);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: var(--white);
+    background-color: var(--black);
+    background-image:
+      radial-gradient(rgba(230, 0, 18, .35) 1.5px, transparent 1.5px),
+      linear-gradient(115deg, transparent 0 62%, rgba(230, 0, 18, .18) 62% 64%, transparent 64%);
+    background-size: 14px 14px, 100% 100%;
+    padding: 24px 16px 40px;
+  }
+ 
+  .wrap { max-width: 960px; margin: 0 auto; }
+ 
+  a { color: inherit; }
+  a:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
+ 
+  header {
+    position: relative;
+    background: var(--red);
+    color: var(--black);
+    padding: 44px 32px 60px;
+    clip-path: polygon(0 0, 100% 0, 100% 78%, 96% 100%, 0 88%);
+    border-left: 12px solid var(--black);
+    overflow: hidden;
+  }
+  header::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(115deg, transparent 0 28px, rgba(0,0,0,.12) 28px 34px);
+    pointer-events: none;
+  }
+  header h1 {
+    position: relative;
+    display: inline-block;
+    font-family: var(--display);
+    font-size: clamp(2.2rem, 8vw, 4.6rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: 1px;
+    color: var(--white);
+    background: var(--black);
+    padding: 8px 28px 10px;
+    transform: rotate(-3deg) skewX(-8deg);
+    box-shadow: 8px 8px 0 var(--white);
+    animation: slam .55s cubic-bezier(.2, 1.4, .4, 1) both;
+  }
+  header p {
+    position: relative;
+    display: table;
+    margin: 28px 0 0 18px;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.35rem;
+    background: var(--white);
+    color: var(--black);
+    padding: 2px 18px;
+    transform: rotate(-1.5deg) skewX(-8deg);
+    animation: slam .55s .2s cubic-bezier(.2, 1.4, .4, 1) both;
+  }
+ 
+  @keyframes slam {
+    from { opacity: 0; transform: translateX(-60px) rotate(-12deg) skewX(-8deg) scale(1.4); }
+  }
+ 
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: -22px 0 28px 12px;
+    position: relative;
+    z-index: 2;
+  }
+  nav a {
+    font-family: var(--display);
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: var(--white);
+    background: var(--black);
+    border: 3px solid var(--white);
+    padding: 6px 22px;
+    transform: skewX(-14deg);
+    transition: background .15s, color .15s, transform .15s;
+  }
+  nav a:hover, nav a:focus-visible {
+    background: var(--white);
+    color: var(--red);
+    transform: skewX(-14deg) translate(-3px, -3px);
+    box-shadow: 5px 5px 0 var(--red);
+  }
+ 
+  article {
+    background: var(--paper);
+    color: var(--black);
+    padding: 26px 28px;
+    margin-bottom: 36px;
+    border: 4px solid var(--black);
+    box-shadow: 10px 10px 0 var(--red);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%);
+  }
+  article h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 1.9rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  article p { max-width: 68ch; margin-bottom: 14px; }
+  article p:last-child { margin-bottom: 0; }
+ 
+  .tanggal {
+    display: inline-block;
+    background: var(--red);
+    color: var(--white);
+    font-weight: 700;
+    font-style: italic;
+    padding: 0 14px;
+    margin-bottom: 14px;
+    transform: skewX(-12deg);
+  }
+ 
+  .penting {
+    border-left: 8px solid var(--red);
+    background: var(--white);
+    padding: 10px 16px;
+  }
+ 
+  .alasan { list-style: none; counter-reset: alasan; max-width: 68ch; }
+  .alasan li {
+    counter-increment: alasan;
+    position: relative;
+    padding: 4px 0 18px 54px;
+  }
+  .alasan li::before {
+    content: counter(alasan);
+    position: absolute; left: 6px; top: 6px;
+    width: 32px; height: 32px;
+    display: grid; place-items: center;
+    font-family: var(--display);
+    font-size: 1.1rem;
+    background: var(--red);
+    color: var(--white);
+    transform: rotate(45deg);
+  }
+ 
+  .kembali {
+    display: inline-block;
+    margin-top: 18px;
+    font-family: var(--display);
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: var(--white);
+    background: var(--black);
+    padding: 3px 20px;
+    transform: skewX(-12deg);
+    transition: background .15s;
+  }
+  .kembali:hover, .kembali:focus-visible { background: var(--red); }
+ 
+  footer {
+    margin-top: 12px;
+    text-align: right;
+    font-weight: 700;
+    letter-spacing: .5px;
+    background: var(--red);
+    color: var(--black);
+    padding: 10px 24px 10px 60px;
+    clip-path: polygon(40px 0, 100% 0, 100% 100%, 0 100%);
+  }
+ 
+  @media (max-width: 760px) {
+    header { padding: 32px 20px 56px; }
+    nav { margin-left: 0; }
+    article { padding: 22px 18px; }
+  }
+ 
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
 </head>
-
 <body>
-
-    <h1>Pelajar Tatap Muka</h1>
- <!-- Menu Navigasi -->
- <table> 
-    <tr>
-        <td colspan="2">
-            <a href="index.html">Beranda</a> | 
-            <a href="https://id.wikipedia.org/wiki/Raditya_Dika">Tentang Saya</a> | 
-            <a href="https://id.wikipedia.org/wiki/SMK_Negeri_1_Kota_Tangerang">Sekolahku</a>
-        </td>
-    </tr>
-</table> 
-    <p>
-        Kegiatan Belajar Mengajar (KBM) dialihkan menjadi Pembelajaran Jarak Jauh (PJJ) akibat sebaran abu vulkanik dari erupsi 
-        <b>[1] Gunung Anak Krakatau</b> yang berpotensi 
-        <strong>mengganggu kesehatan dan keselamatan siswa serta guru.</strong>.
-    </p>
-
-    <p style="font-size: 39px; line-height: 1.6; margin-bottom: 3px;margin-top: 8px;">
-        Alasan Pengalihan ke PJJ
-       
-    </p>
-
-    <p  style="font-size: 18px; line-height: 1.1; margin-bottom: 3px;margin-top: 4px;">
-       Kegiatan Belajar Mengajar (KBM) dialihkan menjadi Pembelajaran Jarak Jauh (PJJ) akibat sebaran abu vulkanik dari erupsi Gunung Anak Krakatau yang meluas hingga ke wilayah Banten, Lampung, dan DKI Jakarta.
-    </p>
- <p  style="font-size: 18px; line-height: 1.1; margin-bottom: 3px;margin-top: 4px;">
-     Langkah darurat yang diterapkan mulai Senin, 7 September 2026 ini diambil oleh pemerintah daerah demi menjaga kesehatan dan keselamatan para siswa, guru, serta warga sekolah. Berikut adalah alasan utama mengapa kebijakan PJJ tersebut diberlakukan:
-  </p>
-    
-    <p  style="font-size: 18px; line-height: 1.1; margin-bottom: 3px;margin-top: 4px;">
-        Erupsi yang terjadi membuat nilai Indeks Standar Pencemaran Udara (ISPU) di daerah terdampak melonjak ke kategori yang tidak aman untuk aktivitas luar ruangan.
-     </p>  
-    
-    <p  style="font-size: 18px; line-height: 1.1; margin-bottom: 3px;margin-top: 4px;">
-       Kesiapsiagaan dan Mitigasi Bencana: Dinas Pendidikan di berbagai kota (seperti Jakarta, Cilegon, Serang, dan Tangerang) mengeluarkan surat edaran khusus agar anak-anak tetap tinggal di dalam rumah demi meminimalisasi paparan langsung di perjalanan maupun di area sekolah. 
-    </p>
-    
-    <hr>
-
+<div class="wrap">
+ 
+  <header>
+    <h1>Pembelajaran Jarak Jauh</h1>
+    <p>Productivity is key, Be motivated.</p>
+  </header>
+ 
+  <nav aria-label="Menu utama">
+    <a href="index.html">Beranda</a>
+    <a href="tentangsaya.html">Tentang Saya</a>
+    <a href="https://id.wikipedia.org/wiki/SMK_Negeri_1_Kota_Tangerang" target="_blank" rel="noopener">Sekolahku</a>
+    <a href="https://www.youtube.com/watch?v=VvrAyv5aI0o&list=RDUbR_cocya4Q&index=2" target="_blank" rel="noopener">Fav Song</a>
+  </nav>
+ 
+  <main>
+    <article>
+      <span class="tanggal">Berlaku mulai Senin, 7 September 2026</span>
+      <p class="penting">
+        Kegiatan Belajar Mengajar (KBM) dialihkan menjadi Pembelajaran Jarak Jauh (PJJ) akibat sebaran abu vulkanik dari erupsi
+        <b>Gunung Anak Krakatau</b> yang berpotensi
+        <strong>mengganggu kesehatan dan keselamatan siswa serta guru.</strong>
+      </p>
+    </article>
+ 
+    <article>
+      <h2>Alasan Pengalihan ke PJJ</h2>
+      <p>
+        Kegiatan Belajar Mengajar (KBM) dialihkan menjadi Pembelajaran Jarak Jauh (PJJ) akibat sebaran abu vulkanik dari erupsi Gunung Anak Krakatau yang meluas hingga ke wilayah Banten, Lampung, dan DKI Jakarta.
+      </p>
+      <p>
+        Langkah darurat yang diterapkan mulai Senin, 7 September 2026 ini diambil oleh pemerintah daerah demi menjaga kesehatan dan keselamatan para siswa, guru, serta warga sekolah. Berikut adalah alasan utama mengapa kebijakan PJJ tersebut diberlakukan:
+      </p>
+ 
+      <ol class="alasan">
+        <li>Erupsi yang terjadi membuat nilai Indeks Standar Pencemaran Udara (ISPU) di daerah terdampak melonjak ke kategori yang tidak aman untuk aktivitas luar ruangan.</li>
+        <li><b>Kesiapsiagaan dan Mitigasi Bencana:</b> Dinas Pendidikan di berbagai kota (seperti Jakarta, Cilegon, Serang, dan Tangerang) mengeluarkan surat edaran khusus agar anak-anak tetap tinggal di dalam rumah demi meminimalisasi paparan langsung di perjalanan maupun di area sekolah.</li>
+      </ol>
+ 
+      <a class="kembali" href="index.html">Kembali ke Beranda</a>
+    </article>
+  </main>
+ 
+  <footer>&copy; Copyright Rhaditya, 2026.</footer>
+ 
+</div>
 </body>
 </html>
